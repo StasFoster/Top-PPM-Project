@@ -23,6 +23,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'Router',
     'TestApp',
+    'Socnet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
