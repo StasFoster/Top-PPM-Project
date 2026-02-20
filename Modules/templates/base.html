@@ -73,6 +73,54 @@
         .lineEl{
             display: inline-block
         }
+    button {
+    position:relative;
+    top: 15px;
+    background: linear-gradient(135deg, #1a0000, #400000);
+    color: #ffffff;
+    border: 2px solid #ff1a1a;
+    padding: 12px 28px;
+    font-size: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 0 10px rgba(255, 0, 0, 0.4),
+        inset 0 0 8px rgba(255, 0, 0, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #400000, #800000);
+    box-shadow: 
+        0 0 20px rgba(255, 0, 0, 0.8),
+        inset 0 0 12px rgba(255, 0, 0, 0.5);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 
+        0 0 10px rgba(255, 0, 0, 0.5),
+        inset 0 0 15px rgba(255, 0, 0, 0.7);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 
+        0 0 15px #ff0000,
+        0 0 25px #990000;
+}
+.elBlock{
+    display:inline-block;
+}
+.disс{
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+        
 </style>
 <body>
     <header>

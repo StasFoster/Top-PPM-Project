@@ -4,7 +4,24 @@
     Социальная сеть
 {% endblock title %}
 
+{% block style %}
+    <style>
+        .qwe{
+            position:relative;
+            float:right;
+        }
+    </style>
+{% endblock style %}
+
 {% block content %}
+    <button onClick="window.location.href = '{% url 'register' %}'" class = "elBlock qwe"> Регистрация </button>
     <h1> Это соц. сеть </h1>
+    {% for i in users %}
+        <div>
+            <h2> {{ i.nickname }} </h2>
+            <h3> {{ i.username }} </h3>
+            <h3> {{ i.interests }} </h3>
+        </div>
+    {% endfor %}
 {% endblock content %}
 

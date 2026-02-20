@@ -5,8 +5,8 @@ class MyUser(models.Model):
     username = models.TextField()
     password = models.TextField()
 
-    datebirth = models.DateField()
-    interests = models.JSONField()
+    datebirth = models.DateField(null=True)
+    interests = models.JSONField(null=True)
     
     
-    
+
