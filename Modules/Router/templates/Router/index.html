@@ -55,19 +55,14 @@ button:focus {
 
 {% block content %}
 
-
-
 <div class="btn_block">
-    <button id="btnFirst" class = "elBlock"> TestModule </button>
+    <button onClick="window.location.href = '{% url 'test' %}'" class = "elBlock"> TestModule </button>
     <p class="disc elBlock"> Тестовый модуль для проыверки перенаправления через js </p>
 </div>
 
+<div class="btn_block">
+    <button onClick="window.location.href = '{% url 'socnet' %}'" class = "elBlock"> Социальная сеть </button>
+    <p class="disc elBlock"> Модуль для обучения использования ORM при регистрации </p>
+</div>
 
-<script>
-    const btn = document.getElementById("btnFirst")
-
-    btn.addEventListener("click", function(){
-        window.location.href = "{% url 'test' %}";
-    })  
-</script>
 {% endblock content %}      

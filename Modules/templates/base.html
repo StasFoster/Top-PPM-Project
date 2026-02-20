@@ -70,10 +70,14 @@
         header h1 {
             animation: glowPulse 3s infinite ease-in-out;
         }
+        .lineEl{
+            display: inline-block
+        }
 </style>
 <body>
     <header>
-        <h1>Мои програмные модули</h1>
+        <h1 class="lineEl">Мои програмные модули</h1>
+        <button onClick="window.location.href = '{% url 'main' %}'" class = "elBlock lineEl"> Главная </button>
     </header>
     {% block content %}{% endblock content %}
     <footer>

@@ -9,3 +9,4 @@ class MyUser(models.Model):
     interests = models.JSONField()
     
     
+    
