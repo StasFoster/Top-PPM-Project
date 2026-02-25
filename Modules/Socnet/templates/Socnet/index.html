@@ -14,7 +14,13 @@
 {% endblock style %}
 
 {% block content %}
+
+{% if user.is_authenticated %}
+    <button onClick="" class = "elBlock qwe"> Выход </button>
+{% else %}
     <button onClick="window.location.href = '{% url 'register' %}'" class = "elBlock qwe"> Регистрация </button>
+{% endif %}
+    
     <h1> Это соц. сеть </h1>
     {% for i in users %}
         <div>

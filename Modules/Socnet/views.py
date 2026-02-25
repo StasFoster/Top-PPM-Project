@@ -8,15 +8,26 @@ from django.contrib.auth import login, logout
 def main(request):
     users = MyUser.objects.all()
 
+    rec = []
+    
+    if request.user.is_authenticated:
+
+        user = request.user
+
+        for i in users:
+            if i.interests["1"] == user.interests["1"]:
+                rec.append(i)
+
     data = {
-        "users": users
+            "users": rec,
+            "user": request.user
     }
     return render(request, "Socnet/index.html", data)
-    # return JsonResponse({"status":True})
+        # return JsonResponse({"status":True})
 
 def register(request):
-
-    return render(request, "Socnet/register.html")
+    form = MyUserForm()
+    return render(request, "Socnet/register.html", {"form":form})
 
 def get_user_data(request):   
     form = MyUserForm(data=request.POST)
@@ -36,16 +47,6 @@ def get_user_data(request):
         user.interests = interests
         user.save()
     
-
-    
-    
-    user = MyUser() # user = User()
-    user.username = nickname
-    user.first_name = username
-    user.password = password
-    user.interests = interests
-    user.save()
-
     return redirect("socnet")
 
 

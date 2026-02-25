@@ -132,17 +132,8 @@
 
     <form method="POST" class="registration-form" action="{% url "get_user_data" %}">
         {% csrf_token %}
-        <label for="nickname">Никнейм:</label>
-        <input type="text" id="nickname" name="nickname" placeholder="Введите ваш никнейм">
-
-        <label for="username">Login:</label>
-        <input type="text" id="username" name="username" placeholder="Введите логин">
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Введите пароль">
-
-        <label for="password_confirm">Password (confirm):</label>
-        <input type="password" id="password_confirm" name="password_confirm" placeholder="Подтвердите пароль">
+        
+        {{form}}
 
         <!-- Блок интересов пользователя -->
         <div class="interests-group">
