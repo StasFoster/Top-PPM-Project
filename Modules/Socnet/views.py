@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import MyUser
+from .forms import MyUserForm
+from django.contrib.auth import login
+# from django.contrib.auth.models import User
 
 def main(request):
     users = MyUser.objects.all()
@@ -39,11 +42,25 @@ def get_user_data(request):
     if password != pass_confirm:
         return  redirect("register")
     
-    user = MyUser()
-    user.nickname = nickname
-    user.username = username
+    
+    user = MyUser() # user = User()
+    user.username = nickname
+    user.first_name = username
     user.password = password
     user.interests = interests
     user.save()
 
     return redirect("socnet")
+
+
+
+
+def test(request):
+    if request.method == "POST":
+        form = MyUserForm(data=request.POST)
+        if form.is_valid():
+            user = form.save()
+
+    else:
+        form = MyUserForm()
+        return render(request, "Socnet/test.html", {"My_form": form})

@@ -1,10 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
-class MyUser(models.Model):
-    nickname = models.TextField()
-    username = models.TextField()
-    password = models.TextField()
-
+class MyUser(AbstractUser):
     datebirth = models.DateField(null=True)
     interests = models.JSONField(null=True)
     
