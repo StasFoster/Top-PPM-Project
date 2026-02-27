@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path("socnet/", views.main, name="socnet"),
     path("socnet/register/", views.register, name="register"),
-    path("socnet/get_user_data", views.get_user_data, name="get_user_data"),
+    path("socnet/get_user_data/", views.get_user_data, name="get_user_data"),
     path("test_net", views.test),
+    path("socnet/logout/", views.logout_user, name="logout"),
 ]

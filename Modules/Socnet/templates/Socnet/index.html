@@ -6,28 +6,146 @@
 
 {% block style %}
     <style>
-        .qwe{
-            position:relative;
-            float:right;
+        /* НОВЫЕ СТИЛИ для красивого вывода пользователей */
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 30px 20px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .user-card {
+            background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+            border: 2px solid #ff1a1a;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,0,0,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .user-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.6);
+            border-color: #ff4d4d;
+        }
+
+        .user-card:hover::before {
+            opacity: 1;
+        }
+
+        .user-nickname {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            color: #ff3333;
+            text-shadow: 0 0 10px #ff0000;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #ff1a1a;
+            padding-bottom: 8px;
+        }
+
+        .user-username {
+            font-size: 1.2rem;
+            margin: 8px 0;
+            color: #ff9999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .user-username::before {
+            content: '@';
+            color: #ff4d4d;
+            font-weight: bold;
+        }
+
+        .user-interests {
+            margin: 15px 0 5px 0;
+            padding: 12px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid #ff1a1a;
+            font-style: italic;
+            color: #e0e0e0;
+            line-height: 1.5;
+        }
+
+        .user-interests strong {
+            color: #ff6666;
+            font-style: normal;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 30px 0 10px 0;
+            color: #ff4d4d;
+            text-shadow: 0 0 15px #ff0000;
+            letter-spacing: 4px;
+        }
+
+        .header-buttons {
+            display: flex;
+            justify-content: flex-end;
+            padding: 0 30px;
+            margin-bottom: 20px;
         }
     </style>
 {% endblock style %}
 
 {% block content %}
+    <div class="header-buttons">
+        {% if user.is_authenticated %}
+            <button onClick="window.location.href = '{% url 'logout' %}'" class="elBlock qwe"> Выход </button>
+        {% else %}
+            <button onClick="window.location.href = '{% url 'register' %}'" class="elBlock qwe"> Регистрация </button>
+        {% endif %}
+    </div>
 
-{% if user.is_authenticated %}
-    <button onClick="" class = "elBlock qwe"> Выход </button>
-{% else %}
-    <button onClick="window.location.href = '{% url 'register' %}'" class = "elBlock qwe"> Регистрация </button>
-{% endif %}
-    
-    <h1> Это соц. сеть </h1>
-    {% for i in users %}
-        <div>
-            <h2> {{ i.nickname }} </h2>
-            <h3> {{ i.username }} </h3>
-            <h3> {{ i.interests }} </h3>
+    <div class="content-wrapper">
+        <h1 class="page-title"> Пользователи социальной сети </h1>
+        
+        <div class="users-grid">
+            {% for i in users %}
+                <a href="{% url "user" i.id %}">
+                    <div class="user-card">
+                        <h2 class="user-nickname">{{ i.nickname }}</h2>
+                        <div class="user-username">{{ i.username }}</div>
+                        <div class="user-interests">
+                            <strong>Интересы:</strong>
+                            {{ i.interests|default:"Не указаны" }}
+                        </div>
+                    </div>
+                </a>
+            {% empty %}
+                <div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #ff9999;">
+                    Пока нет зарегистрированных пользователей
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
+    </div>
 {% endblock content %}
-

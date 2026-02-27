@@ -14,9 +14,33 @@ def main(request):
 
         user = request.user
 
+        my_vector = user.interests["vector"]
+
         for i in users:
-            if i.interests["1"] == user.interests["1"]:
-                rec.append(i)
+            if request.user.id != i.id:
+                i_vector = i.interests["vector"]
+                
+                a = 0
+                for j in range(5):
+                    a += (my_vector[j] * i_vector[j])
+
+                b1 = 0
+                for j in range(5):
+                    b1 += my_vector[j] ** 2
+
+                b2 = 0
+                for j in range(5):
+                    b2 += i_vector[j] ** 2
+
+                b = b1 ** 0.5 + b2 ** 0.5
+
+                scalar = a/b
+                print(f"scalar {scalar}")
+                if scalar >= 0.6:
+                    rec.append(i)
+                print(f"rec {rec}")
+
+            
 
     data = {
             "users": rec,
@@ -36,13 +60,13 @@ def get_user_data(request):
         login(request,user)
 
         list_interests = ["sport","video_game","book","films","automobile"]
-        interests = {}
+        interests = {"vector":[]}
         for i in range(1, len(list_interests) + 1):
             interest = request.POST.get(list_interests[i - 1])
             if interest == "on":
-                interests[i] = 1
+                interests["vector"].append(1)
             else:
-                interests[i] = 0
+                interests["vector"].append(0)
         
         user.interests = interests
         user.save()
@@ -62,3 +86,7 @@ def test(request):
     else:
         form = MyUserForm()
         return render(request, "Socnet/test.html", {"My_form": form})
+    
+def logout_user(request):
+    logout(request)
+    return redirect("socnet")
