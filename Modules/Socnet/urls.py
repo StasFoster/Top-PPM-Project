@@ -8,4 +8,5 @@ urlpatterns = [
     path("socnet/get_user_data/", views.get_user_data, name="get_user_data"),
     path("test_net", views.test),
     path("socnet/logout/", views.logout_user, name="logout"),
+    path("socnet/user/<int:id>/", views.profile, name="user"), #socnet/user/2/
 ]

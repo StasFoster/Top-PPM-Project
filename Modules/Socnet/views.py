@@ -90,3 +90,17 @@ def test(request):
 def logout_user(request):
     logout(request)
     return redirect("socnet")
+
+def profile(request, id):
+    user = MyUser.objects.get(id=id)
+
+    intrerests = {}
+    for i, el in enumerate(["sport","video_game","book","films","automobile"], 0):
+        intrerests[el] = user.interests["vector"][i]
+    print(f"до {user.interests}")
+    print(f"после {intrerests}")
+    data = {
+        "user": user,
+        "interests": intrerests,
+    }
+    return render(request,"Socnet/user.html", data)
