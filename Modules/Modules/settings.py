@@ -24,6 +24,8 @@ INSTALLED_APPS = [
     'Router',
     'TestApp',
     'Socnet',
+    'Test_API',
+    'Wikipedia',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

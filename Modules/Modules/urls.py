@@ -6,4 +6,6 @@ urlpatterns = [
     path('', include('Router.urls')),
     path('', include('TestApp.urls')),
     path('', include('Socnet.urls')),
+    path('', include('Test_API.urls')),
+    path('', include('Wikipedia.urls')),
 ]
